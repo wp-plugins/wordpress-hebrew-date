@@ -1,7 +1,7 @@
 === Wordpress Hebrew Date ===
 Tags: hebrew, date, jewish
 Requires at least: 2.0
-Tested up to: 2.8.4
+Tested up to: 2.9
 Stable tag: 0.3.2
 
 Convert dates in wordpress to Hebrew dates.
