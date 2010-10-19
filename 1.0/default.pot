@@ -1,0 +1,35 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Wordpress Hebrew Date\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-17 12:32+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Amiad Bareli <amiadb [at] gmail>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date\n"
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:57
+msgid "Hebrew date options"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:62
+msgid "Hebrew date language"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:64
+msgid "Hebrew"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:65
+msgid "English"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:72
+msgid "Save Changes"
+msgstr ""
+
