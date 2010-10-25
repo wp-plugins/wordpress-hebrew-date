@@ -9,6 +9,7 @@ Convert dates in wordpress to Hebrew dates.
 == Description ==
 
 The plugin preview Hebrew date in date of post and date of comments.
+The hebrew date format able to change in options page of the plugin.
 
 == Installation ==
 
@@ -22,7 +23,7 @@ The plugin preview Hebrew date in date of post and date of comments.
 1. Example
 
 == Changelog ==
-= 1.0=
+= 1.0 =
 * Add options page.
 * Control on date format.
 * improved Gregorian date display.
