@@ -3,9 +3,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wordpress Hebrew Date\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-19 12:56+0200\n"
-"PO-Revision-Date: 2010-10-19 12:57+0200\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2010-11-10 13:07+0200\n"
+"PO-Revision-Date: 2010-11-10 13:07+0200\n"
+"Last-Translator: Amiad Bareli <amiadb [at] gmail>\n"
 "Language-Team: Wordpress Hebrew Date team\n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
@@ -17,55 +17,102 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date\n"
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:73
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:81
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:6
 msgid "Hebrew date options"
 msgstr "אפשרויות תאריך עברי"
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:78
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:86
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:11
 msgid "Hebrew date format"
 msgstr "מבנה תאריך עברי"
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:90
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:98
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:23
 msgid "Custom:"
-msgstr ""
+msgstr "מותאם אישית:"
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:91
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:100
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:24
 msgid "Use \"heb\" for Hebrew date and \"greg\" for Gregorian date. Click &#8220;Save Changes&#8221; to update sample output."
 msgstr "השתמש ב־\"heb\" לייצוג תאריך עברי וב־\"greg\" לייצוג תאריך לועזי. שמירת ההגדרות מעדכנת את התצוגה המקדימה."
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:92
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:101
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:25
 #, php-format
 msgid "The Gregorian date format able to change in %s."
 msgstr "ניתן לשנות את מבנה התאריך הלועזי ב%s."
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:92
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:101
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:25
 msgid "General Settings"
 msgstr "הגדרות כלליות"
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:96
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:105
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:29
 msgid "Hebrew date language"
 msgstr "שפת התאריך העברי"
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:98
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:107
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:31
 msgid "Hebrew"
 msgstr "עברית"
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:99
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:108
+msgid "English"
+msgstr "אנגלית"
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:109
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:32
 msgid "Number"
 msgstr "מספר"
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:106
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:113
+msgid "Sunset"
+msgstr "שקיעה"
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:115
+msgid "Transfer hebrew date at sunset"
+msgstr "עבור תאריך עברי בשקיעה"
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:116
+msgid "latitude"
+msgstr "קו רוחב"
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:117
+msgid "longitude"
+msgstr "קו אורך"
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:118
+#, php-format
+msgid "You can to find the longitude and the latitude via %s, via %s or via %s."
+msgstr "אפשר למצוא את קו האורך והרוחב דרך %s, דרך %s או דרך %s."
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:119
+msgid "Google maps"
+msgstr "גוגל מפות"
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:124
+msgid "Current Hebrew date"
+msgstr "תאריך עברי נוכחי"
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:126
+#, php-format
+msgid "if you want to add the hebrew date of today than you need to add %s in theme code where you want. "
+msgstr "להצגת התאריך העברי הנוכחי הוסף %s לקוד התבנית, במקום שברצונך להציג אותו."
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:133
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:39
 msgid "Save Changes"
 msgstr "שמור שינויים"
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:121
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:171
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:45
 msgid "Hebrew Date Options"
 msgstr "אפשרויות תאריך עברי"
 
-#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:121
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:171
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:45
 msgid "Hebrew Date"
 msgstr "תאריך עברי"
-
-#~ msgid "English"
-#~ msgstr "אנגלית"
 

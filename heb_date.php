@@ -3,24 +3,34 @@
 Plugin Name: Wordpress Hebrew Date
 Plugin URI: http://hatul.info/hebdate/
 Description: Convert dates in wordpress to Hebrew dates.
-Version: 1.0
+Version: 1.1
 Author: Hatul
 Author URI: http://hatul.info
 License: GPL http://www.gnu.org/copyleft/gpl.html
 */
 
 function hebDate($sDate) {
-  # Date format of $sDate should be 'm-d-Y'
-  # Returns string, something like:
-  # ג' בתשרי ה'תשס"ז
+  # Returns string of Hebrew Date by hebdate_lang
+  if (strpos($sdate,':')!=false&&get_option('hebdate_sunset')==1) $sdate=sunset($sdate);
   $sGregorianDate = mysql2date('m-d-Y', $sDate);
-  list ($sJewMonth, $sJewDay, $sJewYear) = split('-', $sGregorianDate);
-  $lang=get_option(hebdate_lang)==hebrew;
-  $sHebDate = jdtojewish(gregoriantojd($sJewMonth, $sJewDay, $sJewYear), $lang, CAL_JEWISH_ADD_GERESHAYIM + CAL_JEWISH_ADD_ALAFIM_GERESH);
-  if(!$lang) return $sHebDate;
+  list ($mon, $day, $year) = split('-', $sGregorianDate);
+  $juldate=gregoriantojd($mon, $day, $year);
+  $sHebDate = jdtojewish($juldate, get_option(hebdate_lang)=='hebrew', CAL_JEWISH_ADD_GERESHAYIM + CAL_JEWISH_ADD_ALAFIM_GERESH);
+  if(get_option(hebdate_lang)=='number') return $sHebDate;
+  if(get_option(hebdate_lang)=='english'){
+    list($tmp,$enday,$enyear)=split('/',$sHebDate);
+    $enmon=jdmonthname($juldate, 4);
+    if ($enmon=="AdarI"&&hasLeapYear($juldate)) $enmon='Adar A';
+    elseif ($enmon=="AdarI"&&!hasLeapYear($juldate)) $enmon='Adar';
+    elseif ($enmon=="AdarII") $enmon='Adar B';
+    return $enday.' '.$enmon.' '.$enyear;
+  }
   $sHebDate = iconv("windows-1255", "UTF-8", $sHebDate);
-  list ($sJewDay,$sJewMonth, $sJewYear) = split(' ', $sHebDate);
+  $sHebDate=str_replace("'אדר ב","אדרב", $sHebDate);
+  list($sJewDay,$sJewMonth,$sJewYear)=split(' ',$sHebDate);
   if ($sJewMonth=="חשון") $sJewMonth="מרחשון";
+  if ($sJewMonth=="אדר"&&hasLeapYear($juldate)) $sJewMonth='אדר א׳';
+  if ($sJewMonth=="אדרב") $sJewMonth="אדר ב׳";
   $sJewMonth="ב".$sJewMonth;
   $sHebDate=$sJewDay.' '.$sJewMonth.' '.$sJewYear;
   $sHebDate=str_replace('"','״',$sHebDate);
@@ -30,13 +40,13 @@ function hebDate($sDate) {
 
 function the_hebDate($content) {
   #return the hebrew date of post
-  if (strpos($content,' ')==false&&strpos($content,'-')==false&&strpos($content,'/')==false) return $content;
+  if (strpos($content,' ')==false&&strpos($content,'-')==false&&strpos($content,'/')==false&&strpos($content,':')!=false) return $content;
   global $post;
   $date=$post->post_date;
   if($date=='') return $content; //if this draft not return hebrew date
   return format(hebdate_format(),hebDate($date),mysql2date(get_option('date_format'),$date));
 }
-
+//formatin Hebrew date by $str
 function format($str,$heb,$greg){
   $str=str_replace('heb',$heb,$str);
   $str=str_replace('greg',$greg,$str);
@@ -61,9 +71,10 @@ function comment_hebDate($content) {
 function today_hebDate(){
   #print hebrew date of today
   $today=current_time('mysql');
-  list($date, $time ) = split( ' ', $today );
-  echo(hebdate($date));
+  //list($date, $time ) = split( ' ', $today );
+  echo(hebdate($today));
 }
+//include("admin.php");
 
 function hebdate_options() {
   #admin page
@@ -86,7 +97,8 @@ function hebdate_options() {
 	foreach($formats as $format){
 	?>
 	<input type="radio" name="hebdate_format" value="<?php echo($format) ?>" <?php if(hebdate_format()==$format) echo('checked="checked"'); ?>/><?php echo(format($format,hebdate($example),mysql2date(get_option('date_format'), $example)));?><br/><?php } ?>
-	<input type="radio" name="hebdate_format" value="custom" id="hebdate_format_custom_radio" <?php if(get_option('hebdate_format')=='custom') echo('checked="checked"'); ?>/><?php _e('Custom:')?> <input type="text" name="hebdate_format_custom" value="<?php echo(hebdate_format());?>" onfocus="hebdate_format_custom_radio.checked=true" size="10" dir="ltr"/> <?php echo(format(hebdate_format(),hebdate($example),mysql2date(get_option('date_format'), $example)));?><br/>
+	<input type="radio" name="hebdate_format" value="custom" id="hebdate_format_custom_radio" <?php if(get_option('hebdate_format')=='custom') echo('checked="checked"'); ?>/><?php _e('Custom:')?> 
+<input type="text" name="hebdate_format_custom" value="<?php echo(hebdate_format());?>" onfocus="hebdate_format_custom_radio.checked=true" size="10" dir="ltr"/> <?php echo(format(hebdate_format(),hebdate($example),mysql2date(get_option('date_format'), $example)));?><br/>
 	<p><?php _e('Use "heb" for Hebrew date and "greg" for Gregorian date. Click &#8220;Save Changes&#8221; to update sample output.','hebdate')?><br/>
 	<?php printf(__('The Gregorian date format able to change in %s.','hebdate'),'<a href="options-general.php">'.__('General Settings').'</a>');?></p>
 	</td>
@@ -95,25 +107,68 @@ function hebdate_options() {
 	<th scope="row"><?php _e('Hebrew date language','hebdate')?></th>
 	<td>
 	<input type="radio" name="hebdate_lang" value="hebrew" <?php if(get_option('hebdate_lang')=='hebrew') echo('checked="checked"'); ?>/><?php _e('Hebrew','hebdate')?><br/>
+	<input type="radio" name="hebdate_lang" value="english" <?php if(get_option('hebdate_lang')=='english') echo('checked="checked"');?> /><?php _e('English','hebdate')?><br/>
 	<input type="radio" name="hebdate_lang" value="number" <?php if(get_option('hebdate_lang')=='number') echo('checked="checked"');?> /><?php _e('Number','hebdate')?><br/>
 	</td>
 	</tr>
+	<tr valign="top">
+	<th scope="row"><?php _e('Sunset','hebdate')?></th>
+	<td>
+	<input type="checkbox" name="hebdate_sunset" value="1" id="sunset" <?php if(get_option('hebdate_sunset')==1) echo('checked="checked"'); ?>/><?php _e('Transfer hebrew date at sunset','hebdate');?>  – 
+	<?php _e('latitude','hebdate')?>: <input type="text" name="latitude" value="<?php echo get_option('latitude')?>" onfocus="sunset.checked=true" size="6">
+	<?php _e('longitude','hebdate')?>: <input type="text" name="longitude" value="<?php echo get_option('longitude')?>" onfocus="sunset.checked=true" size="6">
+	<p><?php printf(__('You can to find the longitude and the latitude via %s, via %s or via %s.','hebdate'),
+		'<a href="http://maps.google.com/">'.__('Google maps','hebdate').'</a>',
+			'<a href="http://whatsmylatlng.com/">whatsmylatlng</a>',
+			'<a href="http://www.batchgeo.com/lookup/">batchgeo</a>')?></p>
+	</td>
+	<tr valign="top">
+	<th scope="row"><?php _e('Current Hebrew date','hebdate')?></th>
+	<td>	
+	<p><?php printf(__('if you want to add the hebrew date of today than you need to add %s in theme code where you want. ','hebdate'),'<code>&lrm;&lt;?php today_hebdate() ?&gt;&lrm;</code>')?>	</p>
+	</td></tr>
+	</tr>
 	</table>
 	<input type="hidden" name="action" value="update" />
-	<input type="hidden" name="page_options" value="hebdate_lang,hebdate_format,hebdate_format_custom" />
+	<input type="hidden" name="page_options" value="hebdate_lang,hebdate_format,hebdate_format_custom,hebdate_sunset,latitude,longitude" />
 	<p class="submit">
 	<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
 	</p>
 	</form>
-	</div><?php
+	</div><?php 
 }
 
+//get Julian date and return true if its happen in leap hebrew year
+function hasLeapYear($juldate) {
+	$hebdate=jdtojewish($juldate);
+	list($tmp1,$tmp2,$hebyear)=split('/',$hebdate);
+	if (jewishtojd(6, 1, $hebyear)!=jewishtojd(7, 1, $hebyear))
+		return true;
+	else return false;
+}
+//if value is empty init its to default
 function init(){
   if(get_option('hebdate_lang')=='') update_option('hebdate_lang', 'hebrew' );
   if(hebdate_format()=='') update_option('hebdate_format', 'heb (greg)' );
-
+  if(get_option('latitude')=='') update_option('latitude', '31.776804' );
+  if(get_option('longitude')=='') update_option('longitude', '35.222282' );
 }
-
+//if the time after the sunset return tommrow
+function sunset($date){
+	$date=mysql2date("H-i-s-j-n-Y",$date);
+	list($hour,$min,$sec,$day,$mon,$year)=split('-',$date);
+	$sunset=date_sunset(mktime($hour,$min,0,$day,$mon,$year),SUNFUNCS_RET_STRING,
+	get_option('latitude'),get_option('longitude'));
+	list($sunset_h,$sunset_m)=split(':',$sunset);
+	if ($hour>$sunset_h||($hour==$sunset_h&&$min>$sunset_m)){
+		$date=gregoriantojd($mon,$day,$year)+1;
+		$date=jdtogregorian($date);
+		list($mon,$day,$year)=split('-',$date);
+	}
+	$date=$hour.':'.$min.':'.$sec.' '.$year.'-'.$mon.'-'.$day;
+	return $date;	
+}
+// add options to menu and init values
 function hebdate_admin() {
   add_options_page(__('Hebrew Date Options',hebdate),__('Hebrew Date',hebdate), 'manage_options', 'wordpress-hebrew-date', 'hebdate_options');
   init();

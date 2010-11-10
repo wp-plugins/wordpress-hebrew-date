@@ -2,7 +2,7 @@
 Tags: hebrew, date, jewish
 Requires at least: 2.0
 Tested up to: 3.0.1
-Stable tag: 1.0
+Stable tag: 1.1
 
 Convert dates in wordpress to Hebrew dates.
 
@@ -23,20 +23,24 @@ The hebrew date format able to change in options page of the plugin.
 1. Example
 
 == Changelog ==
+= 1.1 =
+* Add option of change date by the sunset.
+* Add Hebrew months in English.
+* Fix some bugs related to Adar and leap year.
 = 1.0 =
 * Add options page.
 * Control on date format.
-* improved Gregorian date display.
+* Improved Gregorian date display.
 * Add translation to Hebrew and English.
 = 0.3.2 =
-* fix bug in drafts window in admin panel.
-* improved display hebrew date of today.
+* Fix bug in drafts window in admin panel.
+* Improved display hebrew date of today.
 = 0.3.1 =
-* fix bug that prevent display of the hebrew date at post date.
+* Fix bug that prevent display of the hebrew date at post date.
 = 0.3 =
 * Add support in function "the_time".
-* Fix bug in comments manger.
+* Fix bug in comments manager.
 = 0.2 =
-* the Gregorian date by setting of theme.
-* display hebrew date of today.
+* The Gregorian date by setting of theme.
+* Display hebrew date of today.
 
