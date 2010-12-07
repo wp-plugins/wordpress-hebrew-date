@@ -1,4 +1,6 @@
 === Wordpress Hebrew Date ===
+Contributors: hatul
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4HTHWS3LGDDPJ
 Tags: hebrew, date, jewish
 Requires at least: 2.0
 Tested up to: 3.0.1

@@ -3,7 +3,7 @@
 Plugin Name: Wordpress Hebrew Date
 Plugin URI: http://hatul.info/hebdate/
 Description: Convert dates in wordpress to Hebrew dates.
-Version: 1.1
+Version: 1.1.1
 Author: Hatul
 Author URI: http://hatul.info
 License: GPL http://www.gnu.org/copyleft/gpl.html
@@ -40,7 +40,7 @@ function hebDate($sDate) {
 
 function the_hebDate($content) {
   #return the hebrew date of post
-  if (strpos($content,' ')==false&&strpos($content,'-')==false&&strpos($content,'/')==false&&strpos($content,':')!=false) return $content;
+  if ((strpos($content,' ')==false&&strpos($content,'-')==false&&strpos($content,'/')==false)||strpos($content,':')!=false) return $content;
   global $post;
   $date=$post->post_date;
   if($date=='') return $content; //if this draft not return hebrew date
