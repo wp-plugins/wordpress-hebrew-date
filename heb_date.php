@@ -3,7 +3,7 @@
 Plugin Name: Wordpress Hebrew Date
 Plugin URI: http://hatul.info/hebdate/
 Description: Convert dates in wordpress to Hebrew dates.
-Version: 1.1.1
+Version: 1.1.2
 Author: Hatul
 Author URI: http://hatul.info
 License: GPL http://www.gnu.org/copyleft/gpl.html
@@ -11,7 +11,7 @@ License: GPL http://www.gnu.org/copyleft/gpl.html
 
 function hebDate($sDate) {
   # Returns string of Hebrew Date by hebdate_lang
-  if (strpos($sdate,':')!=false&&get_option('hebdate_sunset')==1) $sdate=sunset($sdate);
+  if (strpos($sDate,':')!=false&&get_option('hebdate_sunset')==1) $sDate=sunset($sDate);
   $sGregorianDate = mysql2date('m-d-Y', $sDate);
   list ($mon, $day, $year) = split('-', $sGregorianDate);
   $juldate=gregoriantojd($mon, $day, $year);
@@ -32,6 +32,7 @@ function hebDate($sDate) {
   if ($sJewMonth=="אדר"&&hasLeapYear($juldate)) $sJewMonth='אדר א׳';
   if ($sJewMonth=="אדרב") $sJewMonth="אדר ב׳";
   $sJewMonth="ב".$sJewMonth;
+  if (get_option('hebdate_hide_alafim')==1) $sJewYear= str_replace("ה'",'',$sJewYear);
   $sHebDate=$sJewDay.' '.$sJewMonth.' '.$sJewYear;
   $sHebDate=str_replace('"','״',$sHebDate);
   $sHebDate=str_replace('\'','׳',$sHebDate);
@@ -104,6 +105,11 @@ function hebdate_options() {
 	</td>
 	</tr>
 	<tr valign="top">
+	<th></th>
+	<td>
+	<input type="checkbox" name="hebdate_hide_alafim" value="1" <?php if(get_option('hebdate_hide_alafim')==1) echo('checked="checked"'); ?>/><?php _e('Hide the letter of Alafim','hebdate');?>
+	</td></tr>
+	<tr valign="top">
 	<th scope="row"><?php _e('Hebrew date language','hebdate')?></th>
 	<td>
 	<input type="radio" name="hebdate_lang" value="hebrew" <?php if(get_option('hebdate_lang')=='hebrew') echo('checked="checked"'); ?>/><?php _e('Hebrew','hebdate')?><br/>
@@ -125,12 +131,12 @@ function hebdate_options() {
 	<tr valign="top">
 	<th scope="row"><?php _e('Current Hebrew date','hebdate')?></th>
 	<td>	
-	<p><?php printf(__('if you want to add the hebrew date of today than you need to add %s in theme code where you want. ','hebdate'),'<code>&lrm;&lt;?php today_hebdate() ?&gt;&lrm;</code>')?>	</p>
+	<?php printf(__('if you want to add the hebrew date of today than you need to add %s in theme code where you want. ','hebdate'),'<code>&lrm;&lt;?php today_hebdate() ?&gt;&lrm;</code>')?>
 	</td></tr>
 	</tr>
 	</table>
 	<input type="hidden" name="action" value="update" />
-	<input type="hidden" name="page_options" value="hebdate_lang,hebdate_format,hebdate_format_custom,hebdate_sunset,latitude,longitude" />
+	<input type="hidden" name="page_options" value="hebdate_lang,hebdate_format,hebdate_format_custom,hebdate_hide_alafim,hebdate_sunset,latitude,longitude" />
 	<p class="submit">
 	<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
 	</p>

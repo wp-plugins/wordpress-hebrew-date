@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: hebrew, date, jewish
 Requires at least: 2.0
 Tested up to: 3.0.1
-Stable tag: 1.1
+Stable tag: 1.1.2
 
 Convert dates in wordpress to Hebrew dates.
 
