@@ -3,7 +3,7 @@
 Plugin Name: Wordpress Hebrew Date
 Plugin URI: http://hatul.info/hebdate/
 Description: Convert dates in wordpress to Hebrew dates.
-Version: 1.1.3
+Version: 1.2
 Author: Hatul
 Author URI: http://hatul.info
 License: GPL http://www.gnu.org/copyleft/gpl.html
@@ -47,7 +47,7 @@ function the_hebDate($content) {
   if($date=='') return $content; //if this draft not return hebrew date
   return format(hebdate_format(),hebDate($date),mysql2date(get_option('date_format'),$date));
 }
-//formatin Hebrew date by $str
+//formating Hebrew date by $str
 function format($str,$heb,$greg){
   $str=str_replace('heb',$heb,$str);
   $str=str_replace('greg',$greg,$str);
@@ -82,8 +82,15 @@ function hebdate_options() {
 	$example='1-4-2007';
 	?><div class="wrap">
 	<h2><?php _e('Hebrew date options','hebdate')?></h2>
+	<p><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="4HTHWS3LGDDPJ">
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		<img alt="" border="0" src="https://www.paypalobjects.com/he_IL/i/scr/pixel.gif" width="1" height="1">
+		</form>
+<?php _e('Please donate to me so I can continue developing this plugin','hebdate')?></p>
 	<form method="post" action="options.php">
-	<?php wp_nonce_field('update-options'); ?>
+	 <?php settings_fields( 'hebdate_settings' ); ?>
 	<table class="form-table">
 	<tr valign="top">
 	<th scope="row"><?php _e('Hebrew date format','hebdate')?></th>
@@ -135,11 +142,9 @@ function hebdate_options() {
 	</td></tr>
 	</tr>
 	</table>
-	<input type="hidden" name="action" value="update" />
-	<input type="hidden" name="page_options" value="hebdate_lang,hebdate_format,hebdate_format_custom,hebdate_hide_alafim,hebdate_sunset,latitude,longitude" />
 	<p class="submit">
-	<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
-	</p>
+    	<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+   	</p>
 	</form>
 	</div><?php 
 }
@@ -153,7 +158,7 @@ function hasLeapYear($juldate) {
 	else return false;
 }
 //if value is empty init its to default
-function init(){
+function init_hebdate(){
   if(get_option('hebdate_lang')=='') update_option('hebdate_lang', 'hebrew' );
   if(hebdate_format()=='') update_option('hebdate_format', 'heb (greg)' );
   if(get_option('latitude')=='') update_option('latitude', '31.776804' );
@@ -174,14 +179,21 @@ function sunset($date){
 	$date=$hour.':'.$min.':'.$sec.' '.$year.'-'.$mon.'-'.$day;
 	return $date;	
 }
-// add options to menu and init values
+// add options to menu
 function hebdate_admin() {
   add_options_page(__('Hebrew Date Options',hebdate),__('Hebrew Date',hebdate), 'manage_options', 'wordpress-hebrew-date', 'hebdate_options');
-  init();
+  add_action( 'admin_init', 'register_settings' );	
+}
+// register settings
+function register_settings(){
+  $settings=array('hebdate_lang','hebdate_format','hebdate_format_custom','hebdate_hide_alafim','hebdate_sunset','latitude','longitude');
+  foreach ($settings as $setting)
+  	register_setting('hebdate_settings',$setting);
 }
 
 add_action('admin_menu', 'hebdate_admin');
 load_plugin_textdomain('hebdate', false, dirname( plugin_basename( __FILE__ ) ) );
+register_activation_hook(__FILE__, 'init_hebdate');
 
 add_filter('get_comment_date', 'comment_hebDate');
 add_filter('the_date', 'the_hebdate');

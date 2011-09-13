@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: hebrew, date, jewish
 Requires at least: 2.0
 Tested up to: 3.0.1
-Stable tag: 1.1.2
+Stable tag: 1.2
 
 Convert dates in wordpress to Hebrew dates.
 
@@ -25,6 +25,11 @@ The hebrew date format able to change in options page of the plugin.
 1. Example
 
 == Changelog ==
+= 1.2 =
+* Organizing code and use Wordpress 3.0 functions.
+* Add donate button.
+= 1.1.3 =
+* Add support points to splitting date.
 = 1.1 =
 * Add option of change date by the sunset.
 * Add Hebrew months in English.
