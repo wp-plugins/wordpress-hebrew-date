@@ -1,0 +1,123 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Wordpress Hebrew Date\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-13 15:22+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Amiad Bareli <amiadb [at] gmail>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date\n"
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:6
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:84
+msgid "Hebrew date options"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:11
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:96
+msgid "Hebrew date format"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:23
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:108
+msgid "Custom:"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:24
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:110
+msgid "Use \"heb\" for Hebrew date and \"greg\" for Gregorian date. Click &#8220;Save Changes&#8221; to update sample output."
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:25
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:111
+#, php-format
+msgid "The Gregorian date format able to change in %s."
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:25
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:111
+msgid "General Settings"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:29
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:120
+msgid "Hebrew date language"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:31
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:122
+msgid "Hebrew"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:32
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:124
+msgid "Number"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:39
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:146
+msgid "Save Changes"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:45
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:184
+msgid "Hebrew Date Options"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/admin.php:45
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:184
+msgid "Hebrew Date"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:91
+msgid "Please donate to me so I can continue developing this plugin"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:117
+msgid "Hide the letter of Alafim"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:123
+msgid "English"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:128
+msgid "Sunset"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:130
+msgid "Transfer hebrew date at sunset"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:131
+msgid "latitude"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:132
+msgid "longitude"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:133
+#, php-format
+msgid "You can to find the longitude and the latitude via %s, via %s or via %s."
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:134
+msgid "Google maps"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:139
+msgid "Current Hebrew date"
+msgstr ""
+
+#: /opt/lampp/htdocs/wp/wp-content/plugins/wordpress-hebrew-date/heb_date.php:141
+#, php-format
+msgid "if you want to add the hebrew date of today than you need to add %s in theme code where you want. "
+msgstr ""
+
