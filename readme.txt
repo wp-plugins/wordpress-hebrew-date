@@ -3,8 +3,8 @@ Contributors: hatul
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4HTHWS3LGDDPJ
 Tags: hebrew, date, jewish
 Requires at least: 2.0
-Tested up to: 3.0.1
-Stable tag: 1.2
+Tested up to: 3.8.1
+Stable tag: 1.2.1
 
 Convert dates in wordpress to Hebrew dates.
 
@@ -25,6 +25,9 @@ The hebrew date format able to change in options page of the plugin.
 1. Example
 
 == Changelog ==
+= 1.2.1 =
+* Fix bug that caused display the current date instead of post date.
+* Replace old PHP functions.
 = 1.2 =
 * Organizing code and use Wordpress 3.0 functions.
 * Add donate button.

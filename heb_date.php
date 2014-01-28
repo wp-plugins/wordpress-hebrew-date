@@ -13,12 +13,12 @@ function hebDate($sDate) {
   # Returns string of Hebrew Date by hebdate_lang
   if (strpos($sDate,':')!=false&&get_option('hebdate_sunset')==1) $sDate=sunset($sDate);
   $sGregorianDate = mysql2date('m-d-Y', $sDate);
-  list ($mon, $day, $year) = split('-', $sGregorianDate);
+  list ($mon, $day, $year) = explode('-', $sGregorianDate);
   $juldate=gregoriantojd($mon, $day, $year);
   $sHebDate = jdtojewish($juldate, get_option(hebdate_lang)=='hebrew', CAL_JEWISH_ADD_GERESHAYIM + CAL_JEWISH_ADD_ALAFIM_GERESH);
   if(get_option(hebdate_lang)=='number') return $sHebDate;
   if(get_option(hebdate_lang)=='english'){
-    list($tmp,$enday,$enyear)=split('/',$sHebDate);
+    list($tmp,$enday,$enyear)=explode('/',$sHebDate);
     $enmon=jdmonthname($juldate, 4);
     if ($enmon=="AdarI"&&hasLeapYear($juldate)) $enmon='Adar A';
     elseif ($enmon=="AdarI"&&!hasLeapYear($juldate)) $enmon='Adar';
@@ -27,7 +27,7 @@ function hebDate($sDate) {
   }
   $sHebDate = iconv("windows-1255", "UTF-8", $sHebDate);
   $sHebDate=str_replace("'אדר ב","אדרב", $sHebDate);
-  list($sJewDay,$sJewMonth,$sJewYear)=split(' ',$sHebDate);
+  list($sJewDay,$sJewMonth,$sJewYear)=explode(' ',$sHebDate);
   if ($sJewMonth=="חשון") $sJewMonth="מרחשון";
   if ($sJewMonth=="אדר"&&hasLeapYear($juldate)) $sJewMonth='אדר א׳';
   if ($sJewMonth=="אדרב") $sJewMonth="אדר ב׳";
@@ -72,7 +72,7 @@ function comment_hebDate($content) {
 function today_hebDate(){
   #print hebrew date of today
   $today=current_time('mysql');
-  //list($date, $time ) = split( ' ', $today );
+  //list($date, $time ) = explode( ' ', $today );
   echo(hebdate($today));
 }
 //include("admin.php");
@@ -152,7 +152,7 @@ function hebdate_options() {
 //get Julian date and return true if its happen in leap hebrew year
 function hasLeapYear($juldate) {
 	$hebdate=jdtojewish($juldate);
-	list($tmp1,$tmp2,$hebyear)=split('/',$hebdate);
+	list($tmp1,$tmp2,$hebyear)=explode('/',$hebdate);
 	if (jewishtojd(6, 1, $hebyear)!=jewishtojd(7, 1, $hebyear))
 		return true;
 	else return false;
@@ -167,14 +167,14 @@ function init_hebdate(){
 //if the time after the sunset return tommrow
 function sunset($date){
 	$date=mysql2date("H-i-s-j-n-Y",$date);
-	list($hour,$min,$sec,$day,$mon,$year)=split('-',$date);
+	list($hour,$min,$sec,$day,$mon,$year)=explode('-',$date);
 	$sunset=date_sunset(mktime($hour,$min,0,$day,$mon,$year),SUNFUNCS_RET_STRING,
 	get_option('latitude'),get_option('longitude'));
-	list($sunset_h,$sunset_m)=split(':',$sunset);
+	list($sunset_h,$sunset_m)=explode(':',$sunset);
 	if ($hour>$sunset_h||($hour==$sunset_h&&$min>$sunset_m)){
 		$date=gregoriantojd($mon,$day,$year)+1;
 		$date=jdtogregorian($date);
-		list($mon,$day,$year)=split('-',$date);
+		list($mon,$day,$year)=explode('/',$date);
 	}
 	$date=$hour.':'.$min.':'.$sec.' '.$year.'-'.$mon.'-'.$day;
 	return $date;	
