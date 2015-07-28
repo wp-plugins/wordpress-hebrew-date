@@ -28,7 +28,9 @@ You can add widget to the sidebar for show the hebrew date of today.
 
 == Screenshots ==
 
-1. Example
+1. Date in post
+2. Date in comment
+3. Widget
 
 == Changelog ==
 = 1.3 =
