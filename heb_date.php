@@ -3,7 +3,7 @@
 Plugin Name: Wordpress Hebrew Date
 Plugin URI: http://hatul.info/hebdate/
 Description: Convert dates in wordpress to Hebrew dates.
-Version: 1.2
+Version: 1.3
 Author: Hatul
 Author URI: http://hatul.info
 License: GPL http://www.gnu.org/copyleft/gpl.html
@@ -15,9 +15,9 @@ function hebDate($sDate) {
   $sGregorianDate = mysql2date('m-d-Y', $sDate);
   list ($mon, $day, $year) = explode('-', $sGregorianDate);
   $juldate=gregoriantojd($mon, $day, $year);
-  $sHebDate = jdtojewish($juldate, get_option(hebdate_lang)=='hebrew', CAL_JEWISH_ADD_GERESHAYIM + CAL_JEWISH_ADD_ALAFIM_GERESH);
-  if(get_option(hebdate_lang)=='number') return $sHebDate;
-  if(get_option(hebdate_lang)=='english'){
+  $sHebDate = jdtojewish($juldate, get_option('hebdate_lang')=='hebrew', CAL_JEWISH_ADD_GERESHAYIM + CAL_JEWISH_ADD_ALAFIM_GERESH);
+  if(get_option('hebdate_lang')=='number') return $sHebDate;
+  if(get_option('hebdate_lang')=='english'){
     list($tmp,$enday,$enyear)=explode('/',$sHebDate);
     $enmon=jdmonthname($juldate, 4);
     if ($enmon=="AdarI"&&hasLeapYear($juldate)) $enmon='Adar A';
@@ -26,11 +26,11 @@ function hebDate($sDate) {
     return $enday.' '.$enmon.' '.$enyear;
   }
   $sHebDate = iconv("windows-1255", "UTF-8", $sHebDate);
-  $sHebDate=str_replace("'אדר ב","אדרב", $sHebDate);
+  $sHebDate=str_replace('אדר ב', 'אדרב', $sHebDate);
   list($sJewDay,$sJewMonth,$sJewYear)=explode(' ',$sHebDate);
   if ($sJewMonth=="חשון") $sJewMonth="מרחשון";
   if ($sJewMonth=="אדר"&&hasLeapYear($juldate)) $sJewMonth='אדר א׳';
-  if ($sJewMonth=="אדרב") $sJewMonth="אדר ב׳";
+  if ($sJewMonth == "אדרב" || $sJewMonth == "אדרב'") $sJewMonth = "אדר ב׳";
   $sJewMonth="ב".$sJewMonth;
   if (get_option('hebdate_hide_alafim')==1) $sJewYear= str_replace("ה'",'',$sJewYear);
   $sHebDate=$sJewDay.' '.$sJewMonth.' '.$sJewYear;
@@ -75,6 +75,7 @@ function today_hebDate(){
   //list($date, $time ) = explode( ' ', $today );
   echo(hebdate($today));
 }
+add_shortcode('today_hebdate', 'today_hebDate');
 //include("admin.php");
 
 function hebdate_options() {
@@ -159,7 +160,7 @@ function hasLeapYear($juldate) {
 }
 //if value is empty init its to default
 function init_hebdate(){
-  if(get_option('hebdate_lang')=='') update_option('hebdate_lang', 'hebrew' );
+  if(get_option('hebdate_lang') == '') update_option('hebdate_lang', 'hebrew');
   if(hebdate_format()=='') update_option('hebdate_format', 'heb (greg)' );
   if(get_option('latitude')=='') update_option('latitude', '31.776804' );
   if(get_option('longitude')=='') update_option('longitude', '35.222282' );
@@ -181,7 +182,7 @@ function sunset($date){
 }
 // add options to menu
 function hebdate_admin() {
-  add_options_page(__('Hebrew Date Options',hebdate),__('Hebrew Date',hebdate), 'manage_options', 'wordpress-hebrew-date', 'hebdate_options');
+  add_options_page(__('Hebrew Date Options', 'hebdate'), __('Hebrew Date', 'hebdate'), 'manage_options', 'wordpress-hebrew-date', 'hebdate_options');
   add_action( 'admin_init', 'register_settings' );	
 }
 // register settings
@@ -200,4 +201,45 @@ add_filter('the_date', 'the_hebdate');
 add_filter('get_the_time', 'the_hebdate');
 add_filter('get_the_date', 'the_hebdate');
 add_filter('comment_time', 'comment_hebdate');
-?>
+
+class Hebdate_Widget extends WP_Widget {
+
+	function __construct() {
+		parent::__construct(
+			'hebdate_widget',
+			__( 'Hebrew Date', 'hebdate' ),
+			array( 'description' => __( 'Show hebrew date of today', 'hebdate' ), ) // Args
+		);
+	}
+
+	public function widget( $args, $instance ) {
+		echo $args['before_widget'];
+		if ( ! empty( $instance['title'] ) ) {
+			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
+		}
+		today_hebDate();
+		echo $args['after_widget'];
+	}
+
+	public function form( $instance ) {
+		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'Today', 'hebdate' );
+		?>
+		<p>
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+		</p>
+		<?php 
+	}
+
+	public function update( $new_instance, $old_instance ) {
+		$instance = array();
+		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+
+		return $instance;
+	}
+
+} 
+function register_hebdate_widget() {
+    register_widget( 'Hebdate_Widget' );
+}
+add_action( 'widgets_init', 'register_hebdate_widget' );

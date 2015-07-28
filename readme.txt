@@ -3,8 +3,8 @@ Contributors: hatul
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4HTHWS3LGDDPJ
 Tags: hebrew, date, jewish
 Requires at least: 2.0
-Tested up to: 4.0
-Stable tag: 1.2.1
+Tested up to: 4.2.2
+Stable tag: 1.3
 
 Convert dates in wordpress to Hebrew dates.
 
@@ -12,6 +12,12 @@ Convert dates in wordpress to Hebrew dates.
 
 The plugin preview Hebrew date in date of post and date of comments.
 The hebrew date format able to change in options page of the plugin.
+
+= Shortcode =
+You can add the shortcode `today_hebdate` in posts or pages for show the hebrew date of today.
+
+= Widget =
+You can add widget to the sidebar for show the hebrew date of today.
 
 == Installation ==
 
@@ -22,9 +28,16 @@ The hebrew date format able to change in options page of the plugin.
 
 == Screenshots ==
 
-1. Example
+1. Date in post
+2. Date in comment
+3. Widget
 
 == Changelog ==
+= 1.3 =
+* Add hebrew date of today widget
+* Add shortcode `[today_hebdate]`
+* Fix some bugs
+
 = 1.2.1 =
 * Fix bug that caused display the current date instead of post date.
 * Replace old PHP functions.
