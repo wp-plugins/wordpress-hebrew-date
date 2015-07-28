@@ -3,7 +3,7 @@
 Plugin Name: Wordpress Hebrew Date
 Plugin URI: http://hatul.info/hebdate/
 Description: Convert dates in wordpress to Hebrew dates.
-Version: 1.2.1
+Version: 1.3
 Author: Hatul
 Author URI: http://hatul.info
 License: GPL http://www.gnu.org/copyleft/gpl.html
@@ -75,6 +75,7 @@ function today_hebDate(){
   //list($date, $time ) = explode( ' ', $today );
   echo(hebdate($today));
 }
+add_shortcode('today_hebdate', 'today_hebDate');
 //include("admin.php");
 
 function hebdate_options() {
@@ -181,7 +182,7 @@ function sunset($date){
 }
 // add options to menu
 function hebdate_admin() {
-  add_options_page(__('Hebrew Date Options',hebdate),__('Hebrew Date',hebdate), 'manage_options', 'wordpress-hebrew-date', 'hebdate_options');
+  add_options_page(__('Hebrew Date Options', 'hebdate'), __('Hebrew Date', 'hebdate'), 'manage_options', 'wordpress-hebrew-date', 'hebdate_options');
   add_action( 'admin_init', 'register_settings' );	
 }
 // register settings
