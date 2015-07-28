@@ -3,7 +3,7 @@
 Plugin Name: Wordpress Hebrew Date
 Plugin URI: http://hatul.info/hebdate/
 Description: Convert dates in wordpress to Hebrew dates.
-Version: 1.2
+Version: 1.2.1
 Author: Hatul
 Author URI: http://hatul.info
 License: GPL http://www.gnu.org/copyleft/gpl.html
@@ -30,7 +30,7 @@ function hebDate($sDate) {
   list($sJewDay,$sJewMonth,$sJewYear)=explode(' ',$sHebDate);
   if ($sJewMonth=="חשון") $sJewMonth="מרחשון";
   if ($sJewMonth=="אדר"&&hasLeapYear($juldate)) $sJewMonth='אדר א׳';
-  if ($sJewMonth=="אדרב") $sJewMonth="אדר ב׳";
+  if ($sJewMonth == "אדרב" || $sJewMonth == "אדרב'") $sJewMonth = "אדר ב׳";
   $sJewMonth="ב".$sJewMonth;
   if (get_option('hebdate_hide_alafim')==1) $sJewYear= str_replace("ה'",'',$sJewYear);
   $sHebDate=$sJewDay.' '.$sJewMonth.' '.$sJewYear;
