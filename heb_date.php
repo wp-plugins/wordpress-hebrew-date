@@ -15,9 +15,9 @@ function hebDate($sDate) {
   $sGregorianDate = mysql2date('m-d-Y', $sDate);
   list ($mon, $day, $year) = explode('-', $sGregorianDate);
   $juldate=gregoriantojd($mon, $day, $year);
-  $sHebDate = jdtojewish($juldate, get_option(hebdate_lang)=='hebrew', CAL_JEWISH_ADD_GERESHAYIM + CAL_JEWISH_ADD_ALAFIM_GERESH);
-  if(get_option(hebdate_lang)=='number') return $sHebDate;
-  if(get_option(hebdate_lang)=='english'){
+  $sHebDate = jdtojewish($juldate, get_option('hebdate_lang')=='hebrew', CAL_JEWISH_ADD_GERESHAYIM + CAL_JEWISH_ADD_ALAFIM_GERESH);
+  if(get_option('hebdate_lang')=='number') return $sHebDate;
+  if(get_option('hebdate_lang')=='english'){
     list($tmp,$enday,$enyear)=explode('/',$sHebDate);
     $enmon=jdmonthname($juldate, 4);
     if ($enmon=="AdarI"&&hasLeapYear($juldate)) $enmon='Adar A';
@@ -26,7 +26,7 @@ function hebDate($sDate) {
     return $enday.' '.$enmon.' '.$enyear;
   }
   $sHebDate = iconv("windows-1255", "UTF-8", $sHebDate);
-  $sHebDate=str_replace("'אדר ב","אדרב", $sHebDate);
+  $sHebDate=str_replace('אדר ב', 'אדרב', $sHebDate);
   list($sJewDay,$sJewMonth,$sJewYear)=explode(' ',$sHebDate);
   if ($sJewMonth=="חשון") $sJewMonth="מרחשון";
   if ($sJewMonth=="אדר"&&hasLeapYear($juldate)) $sJewMonth='אדר א׳';
@@ -160,7 +160,7 @@ function hasLeapYear($juldate) {
 }
 //if value is empty init its to default
 function init_hebdate(){
-  if(get_option('hebdate_lang')=='') update_option('hebdate_lang', 'hebrew' );
+  if(get_option('hebdate_lang') == '') update_option('hebdate_lang', 'hebrew');
   if(hebdate_format()=='') update_option('hebdate_format', 'heb (greg)' );
   if(get_option('latitude')=='') update_option('latitude', '31.776804' );
   if(get_option('longitude')=='') update_option('longitude', '35.222282' );
