@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: hebrew, date, jewish
 Requires at least: 2.0
 Tested up to: 4.2.2
-Stable tag: 1.3
+Stable tag: 1.3.1
 
 Convert dates in wordpress to Hebrew dates.
 
@@ -33,6 +33,8 @@ You can add widget to the sidebar for show the hebrew date of today.
 3. Widget
 
 == Changelog ==
+= 1.3.1 =
+* Fix leap year bug
 = 1.3 =
 * Add hebrew date of today widget
 * Add shortcode `[today_hebdate]`
