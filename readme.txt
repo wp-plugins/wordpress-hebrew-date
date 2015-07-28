@@ -14,7 +14,7 @@ The plugin preview Hebrew date in date of post and date of comments.
 The hebrew date format able to change in options page of the plugin.
 
 = Shortcode =
-You can add the shortcode `today_hebdate` in posts or pages for show the hebrew date of today.
+You can add the shortcode `[today_hebdate]` in posts or pages for show the hebrew date of today.
 
 = Widget =
 You can add widget to the sidebar for show the hebrew date of today.
